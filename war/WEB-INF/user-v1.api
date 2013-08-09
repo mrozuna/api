@@ -1,0 +1,136 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://testapi-16.appspot.com/_ah/api",
+  "name" : "user",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://testapi-16.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "user.insertUser" : {
+      "path" : "addUser",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.UserController.addUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "user.getUserData" : {
+      "path" : "userapi/{id}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.UserController.getUserData",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "user.getAllUser" : {
+      "path" : "collectionresponse_userapi",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.UserController.getUser",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "UserApi" : {
+        "id" : "UserApi",
+        "type" : "object",
+        "properties" : {
+          "nameUser" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "totalPoints" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "CollectionResponse_UserApi" : {
+        "id" : "CollectionResponse_UserApi",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "UserApi"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.Endpoint.UserController.addUser" : {
+        "request" : {
+          "$ref" : "UserApi"
+        },
+        "response" : {
+          "$ref" : "UserApi"
+        }
+      },
+      "com.Endpoint.UserController.getUserData" : {
+        "response" : {
+          "$ref" : "UserApi"
+        }
+      },
+      "com.Endpoint.UserController.getUser" : {
+        "response" : {
+          "$ref" : "CollectionResponse_UserApi"
+        }
+      }
+    }
+  }
+}

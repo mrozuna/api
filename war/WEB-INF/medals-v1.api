@@ -1,0 +1,234 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://testapi-16.appspot.com/_ah/api",
+  "name" : "medals",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://testapi-16.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "medals.updateMedalsUser" : {
+      "path" : "collectionresponse_medalswin/{id}",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.MedalsController.updateMedalsUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "medals.insertMedalsType" : {
+      "path" : "addMedaltype",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.MedalsController.addMedaltype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "medals.listMedalsType" : {
+      "path" : "medalstype",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.MedalsController.listMedalsType",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "medals.listMedalsUser" : {
+      "path" : "collectionresponse_medals/{id}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.MedalsController.getMedalsUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_MedalsWin" : {
+        "id" : "CollectionResponse_MedalsWin",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "MedalsWin"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MedalsWin" : {
+        "id" : "MedalsWin",
+        "type" : "object",
+        "properties" : {
+          "nameMedal" : {
+            "type" : "string"
+          },
+          "amout" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "MedalsType" : {
+        "id" : "MedalsType",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_MedalsType" : {
+        "id" : "CollectionResponse_MedalsType",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "MedalsType"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Medals" : {
+        "id" : "CollectionResponse_Medals",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Medals"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Medals" : {
+        "id" : "Medals",
+        "type" : "object",
+        "properties" : {
+          "idMedals" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "total" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "medalsType" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.Endpoint.MedalsController.updateMedalsUser" : {
+        "request" : {
+          "$ref" : "CollectionResponse_MedalsWin"
+        },
+        "response" : {
+          "$ref" : "CollectionResponse_MedalsWin"
+        }
+      },
+      "com.Endpoint.MedalsController.addMedaltype" : {
+        "request" : {
+          "$ref" : "MedalsType"
+        },
+        "response" : {
+          "$ref" : "MedalsType"
+        }
+      },
+      "com.Endpoint.MedalsController.listMedalsType" : {
+        "response" : {
+          "$ref" : "CollectionResponse_MedalsType"
+        }
+      },
+      "com.Endpoint.MedalsController.getMedalsUser" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Medals"
+        }
+      }
+    }
+  }
+}

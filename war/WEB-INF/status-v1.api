@@ -1,0 +1,162 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://testapi-16.appspot.com/_ah/api",
+  "name" : "status",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://testapi-16.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "status.getStatus" : {
+      "path" : "status/{id}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.StatusController.getStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.addStatus" : {
+      "path" : "addStatus",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.StatusController.addStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.updateStatus" : {
+      "path" : "status",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "com.Endpoint.StatusController.updateStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Status" : {
+        "id" : "Status",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "gameWin" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "gameLost" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "gameDraw" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "statusGameWin" : {
+            "type" : "string"
+          },
+          "statusGameLost" : {
+            "type" : "string"
+          },
+          "statusGameDraw" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "GeneratedStatus" : {
+        "id" : "GeneratedStatus",
+        "type" : "object",
+        "properties" : {
+          "userId" : {
+            "type" : "string"
+          },
+          "gameWin" : {
+            "type" : "string"
+          },
+          "gameLost" : {
+            "type" : "string"
+          },
+          "gameDraw" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.Endpoint.StatusController.getStatus" : {
+        "response" : {
+          "$ref" : "Status"
+        }
+      },
+      "com.Endpoint.StatusController.addStatus" : {
+        "request" : {
+          "$ref" : "GeneratedStatus"
+        },
+        "response" : {
+          "$ref" : "Status"
+        }
+      },
+      "com.Endpoint.StatusController.updateStatus" : {
+        "request" : {
+          "$ref" : "GeneratedStatus"
+        },
+        "response" : {
+          "$ref" : "Status"
+        }
+      }
+    }
+  }
+}
